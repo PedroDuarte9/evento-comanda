@@ -6,6 +6,7 @@ import javax.persistence.Persistence;
 
 import br.com.paraense.assembleia.dao.ComandaDao;
 import br.com.paraense.assembleia.models.EventoComanda;
+import br.com.paraense.assembleia.util.JPAUtil;
 
 public class CadastroComanda {
 
@@ -15,8 +16,8 @@ public class CadastroComanda {
 		comanda.setNameSocio("Carlos");
 		comanda.setNumComanda(6320);
 		
-		EntityManagerFactory etf = Persistence.createEntityManagerFactory("crud-comanda");// Instacia essa Interface que é uma Gerenciadora de Entidades
-		EntityManager em = etf.createEntityManager(); //Instacia essa outra com base na de cima 
+		
+		EntityManager em = JPAUtil.getEntityManager(); //Instanciando a Classe JPAUtil para usar os gerenciadores de entidade e retirar a verbosidade desta classe de teste 
 		
 		ComandaDao dao = new ComandaDao(em);//Instanciei com base no gerenciador de entidade
 		

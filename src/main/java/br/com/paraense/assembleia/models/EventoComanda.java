@@ -4,9 +4,12 @@ import java.time.LocalDate;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -24,11 +27,25 @@ public class EventoComanda {
 	private Integer numComanda;
 
 	@Column(name = "DT_EVT")
-	private LocalDate dataEvento;
+	private LocalDate dataEvento = LocalDate.now();
+	
+	@ManyToOne
+	private Categoria categoriaSocio;
+	
 
 	public EventoComanda() {
-		super();
+		
 	}
+	
+	
+	public EventoComanda(String nameSocio, Integer numComanda, Categoria categoriaSocio) {
+		
+		this.nameSocio = nameSocio;
+		this.numComanda = numComanda;
+		this.categoriaSocio = categoriaSocio;
+	}
+
+
 
 	public Long getId() {
 		return id;
@@ -45,6 +62,15 @@ public class EventoComanda {
 	public void setNameSocio(String nameSocio) {
 		this.nameSocio = nameSocio;
 	}
+		
+	public Integer getNumComanda() {
+		return numComanda;
+	}
+
+	public void setNumComanda(Integer numComanda) {
+		this.numComanda = numComanda;
+	}
+	
 
 	public LocalDate getDataEvento() {
 		return dataEvento;
@@ -54,13 +80,15 @@ public class EventoComanda {
 		this.dataEvento = dataEvento;
 	}
 
-	public Integer getNumComanda() {
-		return numComanda;
+	public Categoria getCategoriaSocio() {
+		return categoriaSocio;
 	}
 
-	public void setNumComanda(Integer numComanda) {
-		this.numComanda = numComanda;
+	public void setCategoriaSocio(Categoria categoriaSocio) {
+		this.categoriaSocio = categoriaSocio;
 	}
+	
+	
 	
 	
 

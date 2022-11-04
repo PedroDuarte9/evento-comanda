@@ -13,6 +13,7 @@ public class Categoria {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "ID_CAT")
 	private Long id;
 	
 	@Column(name = "NM_CATEGORIA")
@@ -22,7 +23,7 @@ public class Categoria {
 		
 	}
 	
-	public Categoria(String nome) {
+	public Categoria( String nome) {
 		this.nome = nome;
 	}
 

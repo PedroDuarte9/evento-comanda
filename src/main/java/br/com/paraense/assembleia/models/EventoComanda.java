@@ -4,8 +4,6 @@ import java.time.LocalDate;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -15,6 +13,7 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "EVT_COMANDA")
 public class EventoComanda {
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "ID")
@@ -24,7 +23,7 @@ public class EventoComanda {
 	private String nameSocio;
 	
 	@Column(name = "NR_PULSE")
-	private Integer numComanda;
+	private Integer numPulseira;
 
 	@Column(name = "DT_EVT")
 	private LocalDate dataEvento = LocalDate.now();
@@ -32,16 +31,16 @@ public class EventoComanda {
 	@ManyToOne
 	private Categoria categoriaSocio;
 	
+	
 
 	public EventoComanda() {
 		
 	}
 	
-	
-	public EventoComanda(String nameSocio, Integer numComanda, Categoria categoriaSocio) {
+	public EventoComanda(String nameSocio, Integer numPulseira, Categoria categoriaSocio) {
 		
 		this.nameSocio = nameSocio;
-		this.numComanda = numComanda;
+		this.numPulseira = numPulseira;
 		this.categoriaSocio = categoriaSocio;
 	}
 
@@ -63,12 +62,12 @@ public class EventoComanda {
 		this.nameSocio = nameSocio;
 	}
 		
-	public Integer getNumComanda() {
-		return numComanda;
+	public Integer getNumPulseira() {
+		return numPulseira;
 	}
 
-	public void setNumComanda(Integer numComanda) {
-		this.numComanda = numComanda;
+	public void setNumComanda(Integer numPulseira) {
+		this.numPulseira = numPulseira;
 	}
 	
 

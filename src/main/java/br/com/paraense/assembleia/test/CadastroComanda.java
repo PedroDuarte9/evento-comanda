@@ -1,5 +1,7 @@
 package br.com.paraense.assembleia.test;
 
+import java.util.List;
+
 import javax.persistence.EntityManager;
 
 import br.com.paraense.assembleia.dao.CategoriaDao;
@@ -12,25 +14,32 @@ public class CadastroComanda {
 
 	public static void main(String[] args) {
 		
-		Categoria categoria = new Categoria("ATIVO_PROPRIETARIO");
+		cadastrarProduto();
+		EntityManager em = JPAUtil.getEntityManager(); 
+		ComandaDao comandaDao = new ComandaDao(em);
 		
-		EventoComanda comanda = new EventoComanda("Pedro", 6320, categoria);	
+		EventoComanda ev = comandaDao.bucarPorId(1l);
+		System.out.println(ev.getNameSocio());
+		
+		List<EventoComanda> todos = comandaDao.buscarTodos();
+		todos.forEach(eve -> System.out.println(eve.getNameSocio()));
+	}
+
+	private static void cadastrarProduto() {
+		Categoria categoria = new Categoria("Ativo Proprietário");
+     	EventoComanda comanda = new EventoComanda("Pedro", 6320, categoria);	
 		
 		
-		EntityManager em = JPAUtil.getEntityManager(); //Instanciando o Gerenciador de persistencia a Classe JPAUtil para usar os gerenciadores de entidade e retirar a verbosidade desta classe de teste 
+		EntityManager em = JPAUtil.getEntityManager(); 
+		ComandaDao comandaDao = new ComandaDao(em);
+		CategoriaDao categoriaDao = new CategoriaDao(em);
 		
-		em.getTransaction().begin();//Inicia a transação
+		em.getTransaction().begin();
+		categoriaDao.getCadastrar(categoria);
+		comandaDao.cadastrar(comanda);
 		
-		em.persist(categoria);
-		categoria.setNome("");
-		
-		em.flush();
-		em.clear();
-		
-		em.merge(comanda);
-		comanda.setNameSocio("Paulo");
-		em.flush();
-		
+		em.getTransaction().commit();
+		em.close();
 	}
 
 }
